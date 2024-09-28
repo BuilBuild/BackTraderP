@@ -16,6 +16,4 @@ set(HEADERPATH comm)
 
 add_subdirectory(src)
 add_subdirectory(comm)
-add_subdirectory(rapidcsv)
-add_subdirectory(gtest)
-add_subdirectory(rapidjson)
+add_subdirectory(tests)

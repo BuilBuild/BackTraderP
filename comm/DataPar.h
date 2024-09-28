@@ -9,4 +9,5 @@ public:
     ~DataPar(){}
 private:
     DataM dm;
+    bool readCSV(std::string);
 };

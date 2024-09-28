@@ -9,5 +9,9 @@ link_libraries(comm)
 
 
 add_executable(main ./main.cpp)
+message(=================== ${CMAKE_CURRENT_SOURCE_DIR}/gtest)
+find_package(GoogleTest)
+
+
 
 

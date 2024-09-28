@@ -32,11 +32,14 @@
 *.app
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 # self
 build
 bin
 .vscode
+=======
+>>>>>>> parent of 20c9102 (init)
 =======
 >>>>>>> parent of 20c9102 (init)
 =======

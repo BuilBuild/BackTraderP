@@ -30,8 +30,11 @@
 *.exe
 *.out
 *.app
+<<<<<<< HEAD
 
 # self
 build
 bin
 .vscode
+=======
+>>>>>>> parent of 20c9102 (init)

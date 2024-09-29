@@ -19,13 +19,13 @@
 typedef struct BarType
 {
     int Volume;
-    double Price;
-    double High;
-    double Low;
-    double Open;
-    double Close;
-    uint64_t sTime;
-    uint64_t eTime;
+    float Price;
+    float High;
+    float Low;
+    float Open;
+    float Close;
+    double sTime;
+    double eTime;
 } BarType;
 
 typedef std::vector<BarType> VecBar;

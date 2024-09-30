@@ -1,5 +1,6 @@
 #pragma once
 #include "DataType.hpp"
+#define __USE_TIME_BITS64
 
 class DataPar
 {
@@ -9,5 +10,5 @@ public:
     ~DataPar(){}
 private:
     DataM dm;
-    bool readCSV(std::string);
+    bool readCSV(std::string path, int period);
 };

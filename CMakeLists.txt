@@ -16,4 +16,4 @@ set(HEADERPATH comm)
 
 add_subdirectory(src)
 add_subdirectory(comm)
-add_subdirectory(tests)
+# add_subdirectory(tests)

@@ -3,12 +3,13 @@
 #include<iostream>
 #include <time.h>
 #include<string.h>
+#include<chrono>
 
 
 
 double StimeToDoubleStamp(std::string st)
 {
-    struct tm tm;
+    struct tm tm{};
     std::string second_time = std::string(st.begin(),st.begin()+19);
     std::string mill_second = std::string(st.begin()+19, st.end());
     strptime(second_time.c_str(), "%Y-%m-%d %H:%M:%S",  &tm);
@@ -28,10 +29,10 @@ DataPar::DataPar(std::vector<std::string> futures, int peroid)
         // std::cout << a << std::endl;
         ;
     }
-    readCSV("/home/leijiulong/git_project/BackTraderP/DataStore/csv/20240924_night/au2412_market_data.csv");
+    readCSV("/home/leijiulong/git_project/BackTraderP/DataStore/csv/20240924_night/au2412_market_data.csv", peroid);
 }
 
-bool DataPar::readCSV(std::string path)
+bool DataPar::readCSV(std::string path, int period)
 {
     std::string futures_name = "";
     // std::string::reverse_iterator rbegin = path.rbegin();
@@ -80,22 +81,17 @@ bool DataPar::readCSV(std::string path)
     // double time_now = 
     std::size_t pr_index= 0;
     std::cout.precision(17);
-    for(std::size_t i=0; i< size; i++)
+    int out_count = 0;
+    for(std::size_t i=0; i< size-14700; i++)
     {
-        // std::cout << sTime << std::endl;
-        int period = 3;
-        
-        // std::cout << second_time << "  " << mill_second<<"   " << double(mktime(&tm))+std::stof(mill_second) <<std::endl;
         double time_now = StimeToDoubleStamp(date + UpdateTime[i]);
-
-        // std::cout <<  time_now << std::endl;
         if((time_now-sTime)<0)
         {
             date = "2024-09-25 ";
             double time_now = StimeToDoubleStamp(date + UpdateTime[i]);
         }
 
-        if((time_now - sTime)>3)
+        if((time_now - sTime)>=period)
         {
             Cl = Price[i];
             Op = Price[pr_index];
@@ -114,18 +110,14 @@ bool DataPar::readCSV(std::string path)
                     Lo = Price[i];
                 }
             }
+            std::cout << ++out_count << std::endl;
             std::cout << "begin time: " << UpdateTime[pr_index]<< "   " <<sTime << std::endl;
-            std::cout << "close: " << Cl << " Open: " << Op \
+            std::cout << "close: " << Cl << " Open: " << Op << " Hig: " << Hi 
             << " Low: " << Lo << "  Volume: " << Vol <<std::endl;
             std::cout << "end time: " << UpdateTime[i]  << "   " <<time_now << std::endl<< std::endl;
+            pr_index = i;
+            sTime = time_now;
         }
-        pr_index = i;
-        sTime = time_now;
-        // if(i >100)
-        // {
-        //     break;
-        // }
-
     }
 
     return false;

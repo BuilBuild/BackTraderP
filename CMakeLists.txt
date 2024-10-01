@@ -8,10 +8,14 @@ set(LIBPATH ${PROJECT_SOURCE_DIR}/lib)
 set(HEADERPATH ${PROJECT_SOURCE_DIR}/include)
 list(APPEND HEADERPATH ${PROJECT_SOURCE_DIR}/comm 
     ${PROJECT_SOURCE_DIR}/external/spdlog
-    
+    ${PROJECT_SOURCE_DIR}/Strategys
+    ${PROJECT_SOURCE_DIR}/HistoryReplayer
+
     )
 
 
 add_subdirectory(src)
 add_subdirectory(comm)
+add_subdirectory(HistoryReplayer)
+add_subdirectory(Strategys)
 # add_subdirectory(tests)

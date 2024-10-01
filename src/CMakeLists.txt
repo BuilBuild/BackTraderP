@@ -8,11 +8,13 @@ include_directories(${HEADERPATH})
 
 link_directories(${LIBPATH})
 link_libraries(comm)
+link_libraries(history_replayer)
 
 
 add_executable(main ./main.cpp)
 add_executable(spdlog_test_main ./spdlog_test_main.cpp)
 
+target_link_libraries(main PUBLIC self_strategy)
 
 
 

@@ -1,23 +1,25 @@
 #include "Strategys.h"
+#include <iostream>
 
+void SelfStragtegyTest::on_init(int id)
+{
+    id = id;
+}
 
-void SelfStragyTest::on_init(int id)
+void SelfStragtegyTest::on_session_begin(double uTDate)
 {
 }
 
-void SelfStragyTest::on_session_begin(double uTDate)
+void SelfStragtegyTest::on_session_end(double uTDate)
 {
 }
 
-void SelfStragyTest::on_session_end(double uTDate)
+void SelfStragtegyTest::on_bar()
 {
 }
 
-void SelfStragyTest::on_bar()
+bool SelfStragtegyTest::on_schedule(double curTime)
 {
-}
-
-bool SelfStragyTest::on_schedule(double curTime)
-{
+    std::cout << curTime << std::endl;
     return false;
 }

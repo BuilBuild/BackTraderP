@@ -112,20 +112,21 @@ bool DataPar::readCSV(std::string path, int period)
                     Lo = Price[i];
                 }
             }
-            std::cout << ++out_count << std::endl;
-            std::cout << "begin time: " << UpdateTime[pr_index]<< "   " <<sTime << std::endl;
-            std::cout << "close: " << Cl << " Open: " << Op << " Hig: " << Hi 
-            << " Low: " << Lo << "  Volume: " << Vol <<std::endl;
-            std::cout << "end time: " << UpdateTime[i]  << "   " <<time_now << std::endl<< std::endl;
+            // std::cout << ++out_count << std::endl;
+            // std::cout << "begin time: " << UpdateTime[pr_index]<< "   " <<sTime << std::endl;
+            // std::cout << "close: " << Cl << " Open: " << Op << " Hig: " << Hi 
+            // << " Low: " << Lo << "  Volume: " << Vol <<std::endl;
+            // std::cout << "end time: " << UpdateTime[i]  << "   " <<time_now << std::endl<< std::endl;
             vb->emplace_back(Vol, Pri, Hi, Lo, Op, Cl, sTime, time_now);
             pr_index = i;
             sTime = time_now;
         }
+        // std::cout << futures_name << std::endl;
     }
 
 
 
-    std::cout << "  999999  "<< vb->size() << std::endl;
+    // std::cout << "  999999  "<< vb->size() << std::endl;
     return false;
 }
 

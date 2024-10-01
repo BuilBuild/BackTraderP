@@ -1,6 +1,9 @@
 #include<iostream>
 
 #include "DataPar.h"
+#include "HistoryReplayer.h"
+#include "StrategyTemp.h"
+#include"Strategys.h"
 
 
 int main()
@@ -21,7 +24,16 @@ int main()
 
     std::vector<std::string> a = {"nihao", "woshi"};
     DataPar dp = DataPar(a,6);
-    // testSpd();
+    HistoryReplayer historyReplayer = HistoryReplayer();
+    SelfStragtegyTest strategy = SelfStragtegyTest();
+    strategy.on_init(1);
+    historyReplayer.addStrategy(&strategy);
+    historyReplayer.setDataPar(&dp);
+    historyReplayer.done();
+    
+    
+    
+    std::cout << "hello " << std::endl;
 
 
     return 0;

@@ -8,8 +8,8 @@ public:
     DataPar();
     DataPar(std::vector<std::string> futures, int peroid);
     ~DataPar(){}
-private:
-    DataM dm;
+public:
+    DataM dm{};
     bool readCSV(std::string path, int period);
     bool dataPush();
 };

@@ -26,6 +26,9 @@ typedef struct BarType
     float Close;
     double sTime;
     double eTime;
+    BarType(int Volume, float Price,float High,float Low,float Open,float Close,double sTime,double eTime):
+    Volume(Volume),Price(Price),High(High),Low(Low),Open(Open),Close(Close),sTime(sTime),eTime(eTime){}
+    BarType(){}
 } BarType;
 
 typedef std::vector<BarType> VecBar;

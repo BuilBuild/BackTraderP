@@ -62,7 +62,6 @@ bool DataPar::readCSV(std::string path, int period)
     
     
     rapidcsv::Document doc(path, rapidcsv::LabelParams(0, 0));
-
     std::vector<int> Volume = doc.GetColumn<int>("Volume");
     std::vector<double> Price = doc.GetColumn<double>("LastPrice");
     std::vector<std::string> UpdateTime = doc.GetColumn<std::string>("UpdateTime");
@@ -82,6 +81,9 @@ bool DataPar::readCSV(std::string path, int period)
     std::size_t pr_index= 0;
     std::cout.precision(17);
     int out_count = 0;
+    BarType bt{};
+    VecBar * vb = &(dm.find(futures_name)->second);
+    std::cout << dm.find(futures_name)->second.size() << std::endl;
     for(std::size_t i=0; i< size-14700; i++)
     {
         double time_now = StimeToDoubleStamp(date + UpdateTime[i]);
@@ -115,10 +117,19 @@ bool DataPar::readCSV(std::string path, int period)
             std::cout << "close: " << Cl << " Open: " << Op << " Hig: " << Hi 
             << " Low: " << Lo << "  Volume: " << Vol <<std::endl;
             std::cout << "end time: " << UpdateTime[i]  << "   " <<time_now << std::endl<< std::endl;
+            vb->emplace_back(Vol, Pri, Hi, Lo, Op, Cl, sTime, time_now);
             pr_index = i;
             sTime = time_now;
         }
     }
 
+
+
+    std::cout << "  999999  "<< vb->size() << std::endl;
+    return false;
+}
+
+bool DataPar::dataPush()
+{
     return false;
 }

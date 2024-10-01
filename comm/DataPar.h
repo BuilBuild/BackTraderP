@@ -11,4 +11,5 @@ public:
 private:
     DataM dm;
     bool readCSV(std::string path, int period);
+    bool dataPush();
 };

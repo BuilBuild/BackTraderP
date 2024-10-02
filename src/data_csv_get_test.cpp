@@ -1,12 +1,20 @@
 #include<iostream>
 #include<string>
-#include "DataCSVGet.h"
+#include "DataMokerSimu.h"
 
 using std::string;
 int main()
 {
+
     string path = "/home/leijiulong/桌面/datastore";
-    DataCSVGet dc(path);
-    dc.dataDone();
+    QuoteMsg qmsg{};
+    qmsg.ql = {"au2410", "AP501", "CF501", "IF2409"};
+    qmsg.sTime = "2024-09-27 09:10:30.50";
+    qmsg.eTime = "2024-09-27 09:50:50.50";
+    qmsg.peroid = 3.2;
+
+    DataMokerSimu dms = DataMokerSimu(path);
+    dms.setQuoteMsg(qmsg);
+    dms.done();
     std::cout << "hello" << std::endl;
 }

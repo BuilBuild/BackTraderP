@@ -19,12 +19,9 @@ public:
     DataCSVGet(std::string path);
     ~DataCSVGet(){}
     bool dataDone();
-
+    path_map_contain data_map_list{};
+    std::string data_path{};
 private:
     void traverseDirectory(const std::string &path, path_map_contain &pmc);
-    std::string data_path{};
-    path_map_contain data_map_list{};
-
-
 
 };

@@ -3,6 +3,7 @@
 
 class SelfStragtegyTest : public StraTemplate
 {
+    int bar_count{};
     int id{};
 public:
     SelfStragtegyTest(){};
@@ -10,7 +11,7 @@ public:
     virtual void on_init(int id);
     virtual void on_session_begin(double uTDate);
     virtual void on_session_end(double uTDate);
-    virtual void on_bar();
+    virtual void on_bar(BarType *);
     virtual bool on_schedule(double curTime);
     /*
      *	回测结束事件

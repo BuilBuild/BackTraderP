@@ -15,7 +15,6 @@
 // typedef __uint32_t uint32_t;
 // typedef __uint64_t uint64_t;
 
-
 typedef struct BarType
 {
     int Volume;

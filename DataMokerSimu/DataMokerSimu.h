@@ -13,19 +13,35 @@ typedef struct QuoteMsg
 }QuoteMsg;
 
 
-
 class FileReadRecoder
 {
 public:
     const std::vector<std::string> *data_file_list=nullptr;
-public:
+    float period{};
+    std::string sTime{};
+    std::string eTime{};
+    double s_time{};
+    double e_time{};
+    double time_now{};
+    double time_pre{};
+    double time_next{};
+    std::string date_now{};
+    bool prepared = false;
+
     FileReadRecoder(const std::vector<std::string> *p):data_file_list(p)
     {
-        std::cout << "File Reader ini" << std::endl;
+        // std::cout << data_file_list->size() << std::endl;
+        // std::cout << "first: "<< data_file_list->at(0) << std::endl;
     }
     ~FileReadRecoder(){
         // std::cout << "delete" << std::endl;
     }
+    void next();
+    void prepare();
+private:
+    //"2024-09-27 09:10:30.50" -> "20240927_night"
+    std::string data_format(std::string s);
+
 };
 
 class DataMokerSimu
@@ -49,4 +65,5 @@ public:
     }
     void setQuoteMsg(QuoteMsg & qm);
     void done();
+    void begin();
 };

@@ -77,7 +77,6 @@ bool DataPar::readCSV(std::string path, int period)
     std::string date = "2024-09-24 ";
     double sTime = StimeToDoubleStamp(date+ UpdateTime[0]);
     double eTime = StimeToDoubleStamp(date+ UpdateTime[0]);
-    // double time_now = 
     std::size_t pr_index= 0;
     std::cout.precision(17);
     int out_count = 0;

@@ -6,7 +6,6 @@
 #include<chrono>
 
 
-
 double StimeToDoubleStamp(std::string st)
 {
     struct tm tm{};
@@ -16,7 +15,6 @@ double StimeToDoubleStamp(std::string st)
     double time_now = double(mktime(&tm))+std::stod(mill_second);
     return time_now;
 }
-
 
 DataPar::DataPar()
 {
@@ -59,7 +57,6 @@ bool DataPar::readCSV(std::string path, int period)
         dm.insert(std::pair<std::string, VecBar>(futures_name, VecBar{}));
     }
     std::cout << &dm << std::endl;
-    
     
     rapidcsv::Document doc(path, rapidcsv::LabelParams(0, 0));
     std::vector<int> Volume = doc.GetColumn<int>("Volume");

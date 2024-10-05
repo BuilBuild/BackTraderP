@@ -24,6 +24,7 @@ void DataMokerSimu::setQuoteMsg(QuoteMsg &qm)
             f->period = qm.peroid;
             f->sTime = qm.sTime;
             f->eTime = qm.eTime;
+            f->quote_name = it->first;
             f->date_now = std::string(qm.sTime.begin(), qm.sTime.begin() + 10);
             tm tm{};
             std::string second_time = std::string(qm.sTime.begin(), qm.sTime.begin() + 19);
@@ -68,46 +69,94 @@ void FileReadRecoder::next()
     {
         prepare();
     }
+    // 找到对应的csv文件开始推送数据
+    if (prepared)
+    {
+
+        ;
+    }
+    // 否则标志回放结束
+    else
+    {
+        std::cout << '1' << std::endl;
+    }
 }
 
 void FileReadRecoder::prepare()
 {
     // 找到对应初始日期的地址
     std::cout << date_now << std::endl;
+
     // 先将开始日期进行转换
     auto data_dir = data_format(sTime);
-    std::cout << "dir===" << data_dir << std::endl;
 
     // 进行正则匹配找到对应文件夹和目录
     // 如果找不到则找与该时间最近的滞后文件
     //  std::regex date_dir_reg(".*/" + data_dir + "/.*");
     std::regex date_dir_reg(R"(.*/([0-9]{8}_[a-z]{3,5})/.*)");
     bool ret = false;
-    for (auto csv_path : *data_file_list)
+
+    for (size_t i = 0; i < data_file_list->size(); ++i)
     {
         std::smatch m;
-        ret = std::regex_match(csv_path, m, date_dir_reg);
-
+        ret = std::regex_match(data_file_list->at(i), m, date_dir_reg);
         if (ret)
         {
-            std::cout << "find_the_file_path: " << csv_path << std::endl;
+            std::cout << "find_the_file_path: " << data_file_list->at(i) << std::endl;
+
             for (auto &elem : m)
             {
-                if(data_dir <=elem.str())
+                if (data_dir <= elem.str())
                 {
-                    std::cout << elem  << std::endl;
+                    std::cout << elem << std::endl;
+                    file_path_index = i;
+                    file_dir = elem.str();
+                    prepared = true;
                     break;
                 }
             }
-            // if(data_dir <= elem)
-            // std::cout << m.str() << std::endl;
-            // std::cout << m.length() << std::endl;
-            // std::cout << m.position() << std::endl;
         }
+        if (prepared)
+            break;
     }
+
     if (!ret)
     {
         std::cout << "cannot find the file path...." << std::endl;
+    }
+
+    if (prepared)
+    {
+        /*
+            合约代码,UpdateTime,LastPrice,Volume,BidPrice1,BidVolume1,AskPrice1,AskVolume1,OpenInterest,Turnover
+        */
+        doc_p = std::make_shared<rapidcsv::Document>(data_file_list->at(file_path_index), rapidcsv::LabelParams(0, 0));
+        std::vector<std::string> UpdateTime = doc_p->GetColumn<std::string>("UpdateTime");
+        std::cout << "count size row: " << doc_p->GetRowCount() << std::endl;
+        size_t row_count = doc_p->GetRowCount();
+        if (row_count > 0)
+        {
+            for (size_t index = 0; index < row_count; ++index)
+            {
+                if(file_dir.length() >13)
+                {
+                    std::cout << "-=-=-=-"<< file_dir << std::endl;
+                }
+              
+                if (index == 5)
+                    break;
+                std::cout << "time start: " << this->sTime<< "  file update time:  " << UpdateTime.at(index) << std::endl;
+                std::cout << "obj :" << this->date_now << std::endl;
+            
+            }
+        }
+        std::cout << "get row name: " << doc_p->GetRowName(3) << std::endl;
+        // for(auto &t : UpdateTime)
+        // {
+        //     std::cout << "date_now: "<<this->date_now << "   "<<t << std::endl;
+
+        //     std::cout << this->sTime << std::endl;
+        // }
     }
 }
 
